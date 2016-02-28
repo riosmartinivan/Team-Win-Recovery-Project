@@ -132,12 +132,13 @@ static int verify_hw_fde_passwd(char *passwd, struct crypt_mnt_ftr* crypt_ftr)
 {
     unsigned char newpw[32] = {0};
     int key_index;
-    if (get_keymaster_hw_fde_passwd(passwd, newpw, crypt_ftr->salt, crypt_ftr))
+    if (get_keymaster_hw_fde_passwd(passwd, newpw, crypt_ftr->salt, crypt_ftr)) {
         key_index = set_hw_device_encryption_key(passwd,
                                            (char*) crypt_ftr->crypto_type_name);
-    else
+    } else {
         key_index = set_hw_device_encryption_key((const char*)newpw,
                                            (char*) crypt_ftr->crypto_type_name);
+    }
     return key_index;
 }
 
